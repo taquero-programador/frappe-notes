@@ -137,7 +137,7 @@ nano sites/library.test/site_config.json
 }
 # or
 
-bench set-config -g developer_mode true
+bench --site library.test set-config developer_mode true
 ```
 
 # login
@@ -213,5 +213,28 @@ bench --site library.test mariadb
 desc tabArticulo; # es la table del doctype creado
 ```
 los datos pasados como Title automaticamente se pasan con minuscula y separado por `_`
-..
 
+# funciones de tipo de documento (doctype)
+
+evitar el nombre como hash y usar el nombre del item
+
+`field:nombre_item`
+
+ahora el nombre del documento sera el nombre del articulo, por lo que no se puede crear otro articulo con
+el mismo nombre.
+
+# Diseño de formulario.
+
+para cambiar la disposicion de los elementos en el formulario, se arrastran tomado la casilla ubicada
+en la primera columna.
+
+en la opcion de _configuracion de formulario_ se debe agregar el nombre del field para que la imagen
+aparesca a un lado del formulario y se puede modificar.
+
+# Permisos.
+
+puede configurar que roles desea permitir y que acciones desea restringir para un doctype.
+
+ir al tipo de documento _Articulo_, deplazar abajo, *seleccion de permisos* y seleccion de roles.
+
+añadir el rol y crear un usuario que tenga los permisos de ese rol.
