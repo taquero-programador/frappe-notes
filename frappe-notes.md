@@ -238,3 +238,10 @@ puede configurar que roles desea permitir y que acciones desea restringir para u
 ir al tipo de documento _Articulo_, deplazar abajo, *seleccion de permisos* y seleccion de roles.
 
 añadir el rol y crear un usuario que tenga los permisos de ese rol.
+
+niveles 
+
+# Metodos de controlador.
+
+
+https://frappeframework.com/docs/v13/user/en/basics/users-and-permissions
