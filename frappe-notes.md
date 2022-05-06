@@ -14,7 +14,9 @@ sudo systemctl set-default graphical.target
 apt install git python-dev python-pip redis-server
 apt-get install software-properties-common
 apt-get install supervisor
+pip3 install bench
 ```
+mariadb
 ```bash
 ### versiones anteriores a ubuntu 20.04
 apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xF1656F24C74CD1D8
@@ -25,6 +27,7 @@ apt-get update
 apt-get install mariadb-server-10.3
 mysql_secure_installation
 apt-get install mariadb-client-10.3
+mysql_secure_installation
 ```
 ```bash
 editar el archivo
@@ -57,8 +60,8 @@ export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || pr
 nvm install 14
 npm install -g yarn
 # or 
-apt install yarn -y
-apt-get install xvfb libfontconfig wkhtmltopdf
+sudo apt install yarn -y
+sudo apt-get install xvfb libfontconfig wkhtmltopdf
 ```
 # iniciando el proyecto
 crear el directorio
@@ -102,6 +105,8 @@ se trae todas las versiones
 
 obtener la v13
 ```bash
+# es mejor esto
+bench switch-to-branch 'nombre de la rama'
 git checkout -f version-13
 bench setup requirements
 bench update
@@ -130,6 +135,9 @@ nano sites/library.test/site_config.json
  "maintenance_mode": 0, # nueva linea
  "pause_sheduler": 0 # nueva linea
 }
+# or
+
+bench set-config -g developer_mode true
 ```
 
 # login
@@ -192,3 +200,17 @@ bench update --no-backup --reset
 bench new-site library.test --db-name 'nombre_de_la_db'
 bench --site library.test install-app library_management
 ```
+
+# modo cosola de frappe (pendiente)
+
+# Doctypes
+
+define propiedades y el comportamiento del modelo.
+
+crear un doctype Articulo.
+```bash
+bench --site library.test mariadb
+desc tabArticulo; # es la table del doctype creado
+```
+los datos pasados como Title automaticamente se pasan con minuscula y separado por `_`
+
