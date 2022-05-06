@@ -213,4 +213,5 @@ bench --site library.test mariadb
 desc tabArticulo; # es la table del doctype creado
 ```
 los datos pasados como Title automaticamente se pasan con minuscula y separado por `_`
+..
 
