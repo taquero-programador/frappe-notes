@@ -51,8 +51,9 @@ systemctl restart mysql
 ```bash
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
 ```
-```bash
 exportar
+
+```bash
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 ```
@@ -68,7 +69,7 @@ crear el directorio
 ```bash
 bench init frappe-bench
 ```
-# crear un usuario para frappe en caso de querer trabajar con otro usuario
+# crear un usuario para frappe en caso de querer trabajar con uno diferente.
 ```bash
 sudo su -
 nano /etc/sudoers
@@ -114,7 +115,7 @@ bench update
 ```bash
 bench update --no-backup --reset
 ```
---reset cambia todos los cambios realizados por del dev
+`--reset` cambia todos los cambios realizados por del dev
 
 con bench start carga el sitio y realiza un rollup
 
