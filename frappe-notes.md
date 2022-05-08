@@ -222,6 +222,8 @@ crear un doctype Articulo.
 ```bash
 bench --site library.test mariadb
 desc tabArticulo; # es la table del doctype creado
+
+bench --site library.test console
 ```
 los datos pasados como Title automaticamente se pasan con minuscula y separado por `_`
 
@@ -288,5 +290,13 @@ Doctypes que estan vinculados a otros como campos de vinculos. se pueden clasifi
 *is Submittable*: se convierte en un doctype que se puede enviar. Pueden tener 3 estados:
 - Borrador: un documento en *Borrador* puede cambia(modificar) en cualquier momento, pero al pasar a *enviado*,
   todos los campos dejan se ser modificables.
-- Enviado:
-- Cancelado:
+- Enviado: el valor de cualquier campo en el documento no se puede cambiar.
+- Cancelado: hace el documento invalido.
+
+si se desea modificar un documento se tiene que cancelar, y despues sobre este realizar un duplicado del documento y el doc original
+se vinculara al modificado a traves del campo de *modificado desde*.
+
+# Validacion del controlador para la membresia.
+
+escribir funcion que cada vez que sea crea una membresia de biblioteca, no exista una membrasia activa para el miembro.
+
