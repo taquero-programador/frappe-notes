@@ -163,6 +163,8 @@ añadir el sitio al host
 ```bash
 bench --sites library.test add-to-hosts
 ```
+acceder por el nombre del site:port
+``http://nombre.site:8000
 
 # instalar app del sitio
 ```bash
@@ -268,7 +270,7 @@ modificar el archivo `library_member.py`
 
 despues de cargar la logica al sistema y aplicar el comando anterior, el nuevo elemento ya mostrara el fullname
 
-# tipos de DocTypes.
+# Tipos de DocTypes.
 
 en esta parte se crea un doctype donde se administrar las membresias de los usuarios existentes, hay un campo `full_name` de tipo solo lectura,
 se llenara con el full name del usuario haciendo referencia a `miembro_de_biblioteca.full_name`
@@ -276,3 +278,6 @@ se llenara con el full name del usuario haciendo referencia a `miembro_de_biblio
 > nota-frappe: como en el caso anterior hace referencia a una columan que se genera de manera automatica mediante el first y last,
 el doctype de miembros genera un nombre para el item MB.####, si lo cambio por full_name al crear un miembro, me lanzara una
 alerta donde requiere el full_name.
+
+# Tipos de documentos vinculados.
+
