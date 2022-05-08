@@ -281,3 +281,12 @@ alerta donde requiere el full_name.
 
 # Tipos de documentos vinculados.
 
+Doctypes que estan vinculados a otros como campos de vinculos. se pueden clasificar en *Maestro* y *Transaccional*.
+
+# Tipos de documentos que se pueden vincular.
+
+*is Submittable*: se convierte en un doctype que se puede enviar. Pueden tener 3 estados:
+- Borrador: un documento en *Borrador* puede cambia(modificar) en cualquier momento, pero al pasar a *enviado*,
+  todos los campos dejan se ser modificables.
+- Enviado:
+- Cancelado:
