@@ -1,4 +1,12 @@
 # frappe library tutorial
+
+error: en caso de recibier "bench comando no encontrado", añadirlo a ~/.bashrc or ~/.zshrc
+```bash
+export PATH=$PATH:~/.local/bin
+
+source ~/.zshrc
+```
+
 deshabilitar gui debian
 ```bash
 sudo systemctl set-default multi-user.target
@@ -244,5 +252,27 @@ niveles
 
 # Metodos de controlador.
 
+en este punto se realiza un doctype donde se iran añadiendo los miembros de la biblioteca.
 
-https://frappeframework.com/docs/v13/user/en/basics/users-and-permissions
+los metodos de controladores permiten escribir logica empresarial durante el ciclo de vida de un documento.
+
+en esta parte se creo un doctype "miembor de biblioeta", uno de los balores es `Full name` tipo dato y oculto, este dato al momento de crear el formulario se mantiene oculto.
+
+pasaremos a la parte logica, escribiendo un modulo para manipular el nombre, apellido y obtener el nombre completo del miembro.
+
+modificar el archivo `library_member.py`
+
+> nora-personal (revisar): la logida de python se añade en el direfctorio de los doctype, el moduloe tiene el nombre del doctype
+
+> nota-frappe: si el fragmento de codigo no funcion, ejecutar lo siguiente  `bench --site <your_site> set-config server_script_enabled true`
+
+despues de cargar la logica al sistema y aplicar el comando anterior, el nuevo elemento ya mostrara el fullname
+
+# tipos de DocTypes.
+
+en esta parte se crea un doctype donde se administrar las membresias de los usuarios existentes, hay un campo `full_name` de tipo solo lectura,
+se llenara con el full name del usuario haciendo referencia a `miembro_de_biblioteca.full_name`
+
+> nota-frappe: como en el caso anterior hace referencia a una columan que se genera de manera automatica mediante el first y last,
+el doctype de miembros genera un nombre para el item MB.####, si lo cambio por full_name al crear un miembro, me lanzara una
+alerta donde requiere el full_name.
