@@ -305,6 +305,8 @@ al seleccionar el membro de la biblioteca, retorna el nombre completo.
 ![full_name link](/enlace_full_name.png "hace referencia al nombre de otro doctype.")
 
 
-escribir funcion que cada vez que sea crea una membresia de biblioteca, no exista una membrasia activa para el miembro.
+la funcion before_submit comprueba que al crear la membresia el usuari no tenga una activa.
+![function py](/before_submit.png "validacion de transaccion.")
+
 ![frappe-validate](/validate.png "valida que el usuario no tenga una membresia activa.")
 
