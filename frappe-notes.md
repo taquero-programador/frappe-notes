@@ -334,3 +334,40 @@ cambio en library_membership, que la fecha calcule automaticamente en funcion de
 
 hacer un cambio en transaccion, que verifique si alcanzo el limite maximo por miembro.
 
+# Guiones de formulario.
+los scripts de formularion son codigo js de lado del cliente que mejoran la experiencia de usuario de su formulario.
+
+supongamos que vamos a crear una membresia para un usuario. debe ir a la lista de membresias de biblioteca, crear un
+nuevo formulario, seleccionar el miembro, otros campos y luego guardar. De una manera similar para crear una nueva
+transaccion para un usario.
+
+mimembro_de_biblioteca.js
+```js
+frappe.ui.form.on('Miembro de biblioteca', {
+    refresh: function(frm) {
+        frm.add_custom_button('Create Membership', () => {
+            frappe.new_doc('Library Membership', {
+                library_member: frm.doc.name
+            })
+        })
+        frm.add_custom_button('Create Transaction', () => {
+            frappe.new_doc('Library Transaction', {
+                library_member: frm.doc.name
+            })
+        })
+    }
+});
+```
+
+al ir a miembro de biblioteca para añadir un miembro, debe de mostrar un par de botones en la parte superior derecha.
+![buttons js](/img/botones_js.png "monstar botones para crear membresia y transacciones.")
+
+para cambiar la primera columna por una diferente.
+![list transaction](img/fcolumn.png "vista columna.")
+
+se añade en la siguiente configuracion del doctype.
+
+> nota: si se pasa el nombre al momento de crear otra transaccion con el mismo usario marca error, hay que mejor colocar por un 
+id TS.#### y ya en la vista de elementos realizar el acomodo segun sea la necesidad.
+![nombrar](img/nombrando.png "auto incremento id.")
+
