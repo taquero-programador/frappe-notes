@@ -299,4 +299,5 @@ se vinculara al modificado a traves del campo de *modificado desde*.
 # Validacion del controlador para la membresia.
 
 escribir funcion que cada vez que sea crea una membresia de biblioteca, no exista una membrasia activa para el miembro.
+![frappe-validate](/validate.png "valida que el usuario no tenga una membresia activa.")
 
