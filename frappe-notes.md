@@ -283,12 +283,12 @@ alerta donde requiere el full_name.
 
 # Tipos de documentos vinculados.
 
-Doctypes que estan vinculados a otros como campos de vinculos. se pueden clasificar en *Maestro* y *Transaccional*.
+Doctypes que estan vinculados a otros como campos de vinculos. se pueden clasificar en **Maestro** y **Transaccional**.
 
 # Tipos de documentos que se pueden vincular.
 
 *is Submittable*: se convierte en un doctype que se puede enviar. Pueden tener 3 estados:
-- Borrador: un documento en *Borrador* puede cambia(modificar) en cualquier momento, pero al pasar a *enviado*,
+- Borrador: un documento en **Borrador** puede cambia(modificar) en cualquier momento, pero al pasar a **enviado**,
   todos los campos dejan se ser modificables.
 - Enviado: el valor de cualquier campo en el documento no se puede cambiar.
 - Cancelado: hace el documento invalido.
@@ -297,6 +297,13 @@ si se desea modificar un documento se tiene que cancelar, y despues sobre este r
 se vinculara al modificado a traves del campo de *modificado desde*.
 
 # Validacion del controlador para la membresia.
+
+crear el doctype **Library Membership**
+![library membership](/library_membership.png "datos para el doctype.")
+
+al seleccionar el membro de la biblioteca, retorna el nombre completo.
+![full_name link](/enlace_full_name.png "hace referencia al nombre de otro doctype.")
+
 
 escribir funcion que cada vez que sea crea una membresia de biblioteca, no exista una membrasia activa para el miembro.
 ![frappe-validate](/validate.png "valida que el usuario no tenga una membresia activa.")
