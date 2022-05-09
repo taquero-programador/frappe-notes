@@ -22,7 +22,8 @@ sudo systemctl set-default graphical.target
 apt install git python-dev python-pip redis-server
 apt-get install software-properties-common
 apt-get install supervisor
-pip3 install bench
+# importante instalar como sudo
+sudo pip3 install frappe-bench
 ```
 mariadb
 ```bash
@@ -114,12 +115,23 @@ se trae todas las versiones
 
 obtener la v13
 ```bash
+bench init 'nombre_proyecto'
+# luego lo demas
 # es mejor esto
 bench switch-to-branch 'nombre de la rama'
 git checkout -f version-13
 bench setup requirements
 bench update
 ```
+
+# instalar nueva app dentro del proyecto actual para integrarlo
+```bash
+bench new-app 'nombre de la app'
+bench --site library.test install-app tienda_prueba
+# revisar que la app este junto a la otra(s)
+bench --site library.test list-apps
+```
+
 ```bash
 bench update --no-backup --reset
 ```
@@ -395,3 +407,9 @@ de igual manera si se va a localhost:8000/articulo, deberia mostrar una vista mu
 
 modificar articulo_row.html
 
+# Apps
+frappe apps son paquetes de python, pueden estar en cualquier lado y deben de tener una entrada en `apps.txt`.
+
+# Crear una aplicacion.
+
+ 
