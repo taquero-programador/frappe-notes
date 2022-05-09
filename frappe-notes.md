@@ -299,35 +299,35 @@ se vinculara al modificado a traves del campo de *modificado desde*.
 # Validacion del controlador para la membresia.
 
 crear el doctype **Library Membership**
-![library membership](/library_membership.png "datos para el doctype.")
+![library membership](img/library_membership.png "datos para el doctype.")
 
 al seleccionar el membro de la biblioteca, retorna el nombre completo.
-![full_name link](/enlace_full_name.png "hace referencia al nombre de otro doctype.")
+![full_name link](img/enlace_full_name.png "hace referencia al nombre de otro doctype.")
 
 ver configuracion: en la lista de elementos muestra LMS.#### y el ful_name del miembro.
-![function py](/before_submit.png "validacion de transaccion.")
+![function py](img/before_submit.png "validacion de transaccion.")
 
 la funcion before_submit comprueba que al crear la membresia el usuari no tenga una activa.
-![ajustes](/ver_configuracion.png "muestra el full_name en la lista de elementos.")
+![ajustes](img/ver_configuracion.png "muestra el full_name en la lista de elementos.")
 
 Mensaje mediante la validacion de before_submit.
-![frappe-validate](/validate.png "valida que el usuario no tenga una membresia activa.")
+![frappe-validate](img/validate.png "valida que el usuario no tenga una membresia activa.")
 
 # Transaccion de biblioteca.
 crear un doctype para la edicion y devolucion de un libro por parte de un miembro activo.
-![library transaction](/library_transaction.png "doctype para la validacion de transaccion.")
+![library transaction](img/library_transaction.png "doctype para la validacion de transaccion.")
 
 # validacion de transaccion
 al publicar un libro debemos validar que el miembro tenga una membresia activa y que el articulo este disponible para
 su difucion.
 
 # Library Settings.
-![library_settingd](/library_settings.png "doctype settings.")
+![library_settingd](img/library_settings.png "doctype settings.")
 
 esto no crea una tabla nueva, sino que se almacenan en una misma tabla llamada tabSingles.
 
 hay que establecer los valores predeterminados para el timpo maximo de prestamo y maximo de articulos.
-![define values](/define_times.png "valores predeterminados.")
+![define values](img/define_times.png "valores predeterminados.")
 
 # Validacion de la configuracion de la biblioteca.
 cambio en library_membership, que la fecha calcule automaticamente en funcion del periodo de prestamo y from_to.
@@ -370,4 +370,28 @@ se añade en la siguiente configuracion del doctype.
 > nota: si se pasa el nombre al momento de crear otra transaccion con el mismo usario marca error, hay que mejor colocar por un 
 id TS.#### y ya en la vista de elementos realizar el acomodo segun sea la necesidad.
 ![nombrar](img/nombrando.png "auto incremento id.")
+
+# Paginas de vista web.
+paginas renderizadas por el servidor para los visitantes del sitio web.
+
+hasta el momento se a trabajado con la interfaz por defecto DESK, pero para los usario querra dar acceso limitado a los usuarios.
+en este caso queremos que los usuarios puedan ver los articulos disponibles que pueden publicar.
+
+añadir nuevos campos en doctype Articulo.
+con esto añadido al crear un nuevo articulo la _vista web_ se vera disponible a la izquiera en los nuevos items.
+![new_data](img/new_regs.png "add data columns.")
+
+# Personlizar plantilla de vista web.
+al activar la vista web se generaron dos nuevos archivos `.html` en templates/.
+
+- articulo.html: trabaja sobre la vista del articulo,
+- articulo_row.html: trabaja sobre la vista de todos los items en localhost:8000/articulo.
+
+editar primero article.html (recordar que los nombres se pasan al idioma que se tenga) articulo.html
+añadiendo etiquetas html, ahora vamos a cualquier articulo de la lista y le damos vista web, nos debe retornar una vista
+del articulo.
+
+de igual manera si se va a localhost:8000/articulo, deberia mostrar una vista muy simple de los articulos.
+
+modificar articulo_row.html
 
