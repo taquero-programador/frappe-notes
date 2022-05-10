@@ -19,7 +19,7 @@ sudo systemctl set-default graphical.target
 
 # Preparacion/instalacion
 ```bash
-apt install git python-dev python-pip redis-server
+apt install git python-dev python3-pip redis-server
 apt-get install software-properties-common
 apt-get install supervisor
 # importante instalar como sudo
@@ -118,6 +118,8 @@ obtener la v13
 bench init 'nombre_proyecto'
 # luego lo demas
 # es mejor esto
+bench init frappe-bench --frappe-branch version-13
+# or
 bench switch-to-branch 'nombre de la rama'
 git checkout -f version-13
 bench setup requirements
@@ -176,7 +178,7 @@ añadir el sitio al host
 bench --sites library.test add-to-hosts
 ```
 acceder por el nombre del site:port
-``http://nombre.site:8000
+http://nombre.site:8000
 
 # instalar app del sitio
 ```bash
@@ -189,9 +191,14 @@ bench --site library.test list-apps
 
 ```
 
-pasar frape a produccion
+pasar frape a produccion, supervisor mantiene activo el servicio de bench start.
 ```bash
 sudo bench setup production 'user'
+```
+
+en caso de tener problemas o correr el servicio con otro proyecto es:
+```bash
+sudo supervisorctl stop all
 ```
 
 si marca error con alguina libreria hacer:
@@ -412,4 +419,24 @@ frappe apps son paquetes de python, pueden estar en cualquier lado y deben de te
 
 # Crear una aplicacion.
 
- 
+# ERPNext
+
+```bash
+bench init frappe-bench --frappe-branch version-13
+# revisar (aun no tiene nada)
+bench start
+# new site
+bench new-site 'nombre.site'
+# get erpnext
+bench get-app erpnext --branch version-13
+# install app
+bench --site 'name_site' install-app 'name_app'
+# change password 
+bench --site valsa.mx set-admin-password 'new pass'
+# hacer un build para reparar dependencias
+bench build
+# reparar dependencias de python
+bench pip install --upgrade rq 'redis' 'vue'
+# marco error con vue
+bench install requirements
+```
