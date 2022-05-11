@@ -440,3 +440,6 @@ bench pip install --upgrade rq 'redis' 'vue'
 # marco error con vue
 bench install requirements
 ```
+
+tambien marca error en el mudulo `from imp import reload` de python y recomienda cambiarlo a `from importlib import reload`.
+en la documentacion dice no afectar el funcionamieno de erpnext y frappe, pero recomienda implementar el cambio.
