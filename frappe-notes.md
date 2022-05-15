@@ -34,7 +34,6 @@ add-apt-repository 'deb [arch=amd64,i386,ppc64el] http://ftp.ubuntu-tw.org/mirro
 ```bash
 apt-get update
 apt-get install mariadb-server-10.3
-mysql_secure_installation
 apt-get install mariadb-client-10.3
 mysql_secure_installation
 ```
@@ -231,7 +230,7 @@ bench new-site library.test --db-name 'nombre_de_la_db'
 bench --site library.test install-app library_management
 ```
 
-# modo cosola de frappe (pendiente)
+# modo consola de frappe (pendiente)
 
 # Doctypes
 
@@ -441,5 +440,154 @@ bench pip install --upgrade rq 'redis' 'vue'
 bench install requirements
 ```
 
-tambien marca error en el mudulo `from imp import reload` de python y recomienda cambiarlo a `from importlib import reload`.
+tambien marca error en el modulo `from imp import reload` de python y recomienda cambiarlo a `from importlib import reload`.
 en la documentacion dice no afectar el funcionamieno de erpnext y frappe, pero recomienda implementar el cambio.
+
+# Copias de seguridad ecriptadas (gnupg).
+
+ir a la siguiente ruta url.link/app/system-settings, deberia estar habilitado el numero de copias de seguridad.
+
+los respaldos se guardan en `sites/valsa.mx/private/backups/`
+
+# Restaurar copias de seguridad
+
+```bash
+# archivos de copia de seguridad completos
+bench --site {site} restore --backup-encryption-key {key} [OPTIONS]
+# archivos de copia de seguridad parciales
+bench --site {site} partial-restore --backup-encryption-key {key} [OPTIONS]
+```
+
+# Install erpnext con repos de valsa
+
+```bash
+# inicia el proyecto normal
+bench init frappe-bench --frappe-branch version-13
+# moverme al directorio del proyecto
+bench get-app url:proyect --branch prod
+ # validar que frappe este correcto
+bench start
+# estuvo marcando error al crear el site
+sudo pip3 install --upgrade frappe-bench
+bench new-site valsa.mx --db-name valsa_mx
+# bajar la version del repo
+bench get-app https://git.gonext.com.mx/frappe/frappe.git --branch prod
+# instalar
+bench --site valsa.mx install-app install-app frappe
+bench build
+cd apps/frappe
+bench setup requirements
+# añadir el site a currentsite.txt
+#bajar erpnext del repo
+bench get-app https://git.gonext.com.mx/frappe/erpnext.git --branch prod
+# instalar la app en el site
+bench --site valsa.mx install-app erpnext
+# marco error en dependencias 
+cd apps/erpnext
+sudo pip3 install -r requirements.txt
+# reinstalar
+bench --site valsa.mx reinstall
+bench build
+```
+
+# Backup y restauracion de la base de datos
+```bash
+bench backup
+# restaurar de un archivo
+sudo bench --force --site 'path/site.name' db.sql.file --db-name 'db_name'
+```
+
+# Importante
+# Puesta en marcha del ERP con los modulos obtenidos del repositorio git.gonenext
+
+iniciar un proyecto frappe
+```bash
+bench init 'name_proyect' --frappe-branch version-13
+```
+
+obtener la app de frappe y realizar los cambios necesarios para que funciones
+```bash
+bench get-app https://git.gonext.com.mx/frappe/frappe.git --branch prod
+```
+
+eliminar directorio en conflicto de apps/frappe
+```bash
+rm -rf frappe/integrations/doctype/twilio_settings/
+```
+
+detallito con yarn
+```bash
+yarn install
+```
+
+crear el site
+```bash
+bench new-site valsa.mx --db-name valsa_db
+```
+
+borrar el directorio de twilio integration
+```bash
+rm -rf frappe/frappe/integrations/doctype/twilio_settings/
+```
+
+activar el modo developer y evitar la ventana de mantenimiento en el navegador
+```bash
+nano sites/library.test/site_config.json
+{
+ "db_name": "_ad03fa1a016ca1c4",
+ "db_password": "6w83Hgp1q2JCSop8",
+ "db_type": "mariadb",
+ "maintenance_mode": 0, # nueva linea
+ "pause_sheduler": 0 # nueva linea
+}
+
+# activar modo developer
+
+bench --site library.test set-config developer_mode true
+```
+
+resetear el password
+```bash
+bench --site valsa.mx set-admin-password
+```
+
+se pasa a repositorio personla rama stable
+
+install erpnext git.gonext
+```bash
+bench get-app https://git.gonext.com.mx/frappe/erpnext.git --branch prod
+```
+
+de nuevo detalle con yarn
+```bash
+yarn install
+# se ejecuta en el directorio de la app
+npx browserslist@latest --update-db
+```
+
+install app erpnext en site
+```bash
+bench --site 'name.site' install-app erpnext
+```
+
+instalacion y orden de apps para el erp
+- valsa solicita modulo mobile en rama dev
+  mobile se instala bien despues de un bench --site 'name.site'  reinstall
+- probar con logistics
+  probe logistics, mobile, un bench build
+  reset del password
+
+importante
+bench new-site dev.valsa.mx --db-name dev_valsa_db --install-app frappe --install-app erpnext
+
+# Proceso de inventraio
+
+- material en stock
+- cotizacion de material 
+- orden de compra
+- compra y recepcion de factura
+- material en transito
+- recepcion del material
+- ingreso del material al sistema
+
+isbr1234
