@@ -35,10 +35,11 @@ add-apt-repository 'deb [arch=amd64,i386,ppc64el] http://ftp.ubuntu-tw.org/mirro
 apt-get update
 apt-get install mariadb-server-10.3
 apt-get install mariadb-client-10.3
-mysql_secure_installation
+# con sudo por el detalle de la contraseña root
+sudo mysql_secure_installation
 ```
 ```bash
-editar el archivo
+# editar el archivo
 nano /etc/mysql/my.cnf
 ```
 añadir lo siguiente
@@ -591,3 +592,20 @@ bench new-site dev.valsa.mx --db-name dev_valsa_db --install-app frappe --instal
 - ingreso del material al sistema
 
 isbr1234
+
+# Desktop (db, pages)
+
+para tener el desktop como los usuarios en produccion se debe cambiar el valor `workspaces` por `desktop` de **tabDefault Values**,
+tambien cargar los datos de las tablas `tabDesk Page` y `tabDesk icon`.
+
+añadir un icono al escritorio (predeterminado):
+```js
+frappe.add_to_desktop('Nombre del acceso', 'Nombre de doctype', false)
+```
+
+añadir un icono al escritorio que envie directamente al reporte:
+```js
+frappe.add_to_desktop('Nombre del acceso', 'Nombre de doctype', 'url del reporte')
+```
+
+> nota: recargar para limbiar el cache o un `bench clean-cache`
