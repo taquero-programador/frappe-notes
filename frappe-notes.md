@@ -609,3 +609,8 @@ frappe.add_to_desktop('Nombre del acceso', 'Nombre de doctype', 'url del reporte
 ```
 
 > nota: recargar para limbiar el cache o un `bench clean-cache`
+
+> nota: para que surta efecto realizar el proceso de la consola en el desktop.
+
+error con e_billing en m2crypto, hay que instalar esto `sudo apt-get install libssl-dev swig python3-dev gcc` y luego
+un `sudo pip3 install m2crypto`|
