@@ -494,8 +494,12 @@ bench build
 # Backup y restauracion de la base de datos
 ```bash
 bench backup
+# descomprimir un gz
+gunzip file.sql.gz
 # restaurar de un archivo
-sudo bench --force --site 'path/site.name' db.sql.file --db-name 'db_name'
+sudo bench --force --site 'path/site.name' restore db.sql.file --db-name 'db_name'
+# cargar una base de datos desde cli
+mysql -u username -p database_name < file.sql
 ```
 
 # Importante
@@ -513,7 +517,7 @@ bench get-app https://git.gonext.com.mx/frappe/frappe.git --branch prod
 
 eliminar directorio en conflicto de apps/frappe
 ```bash
-rm -rf frappe/integrations/doctype/twilio_settings/
+rm -rf frappe/frappe/integrations/doctype/twilio_settings/
 ```
 
 detallito con yarn
@@ -614,3 +618,48 @@ frappe.add_to_desktop('Nombre del acceso', 'Nombre de doctype', 'url del reporte
 
 error con e_billing en m2crypto, hay que instalar esto `sudo apt-get install libssl-dev swig python3-dev gcc` y luego
 un `sudo pip3 install m2crypto`|
+
+valsa_mx
+"EO0xBpLkpD6AD6D5"
+valsa_db
+sdZeFzONc03LZYN0
+
+valsa_db: 1239
+valsa_mx: 1189
+
+# Proceso instalacion sistema valsa
+
+- init de proyecto
+- instalacion de frappe y reemplazo por frappe repo stable
+- instalacion de erpnext repo stable
+- instalacion de retail repo stable
+- mobile
+- e_billing
+- sales_drive
+- edi
+- cheque_management
+- logistic y valsa junto (marca error en doctype.bulk_invoicing_delivery_note)
+
+> nota: trabajar con valsa_dev (usa valsa_mx)
+
+valsa_mx (usa valsa_db) está marcando un error de depuracion con e_commerce_settings al cambiar de base de datos.
+
+# script install
+
+```bash
+#!/bin/sh
+bench get-app https://git.gonext.com.mx/frappe/frappe.git --branch prod &&
+rm -rf apps/frappe/frappe/integrations/doctype/twilio_settings &&
+bench get-app https://git.gonext.com.mx/frappe/erpnext.git --branch prod &&
+bench get-app https://git.gonext.com.mx/ibravo/Mobile.git --branch dev &&
+bench get-app https://git.gonext.com.mx/valsa/e_billing.git --branch prod &&
+bench get-app https://git.gonext.com.mx/valsa/sales_drive.git --branch prod &&
+bench get-app https://git.gonext.com.mx/valsa/edi.git --branch prod &&
+bench get-app https://git.gonext.com.mx/valsa/cheque_management.git --branch prod &&
+bench get-app https://git.gonext.com.mx/valsa/valsa.git --branch prod &&
+bench get-app https://git.gonext.com.mx/valsa/logistics.git --branch prod &&
+bench new-site valsa.site --db-name valsa_db_mx &&
+touch sites/currentsite.txt && echo 'valsa.site' > sites/currentsite.txt &&
+bench --site valsa.site set-config developer_mode true &&
+bench --site valsa.site install-app frappe erpnext mobile e_billing sales_drive edi cheque_management logistics valsa
+```
